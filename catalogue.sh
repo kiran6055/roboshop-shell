@@ -9,8 +9,8 @@ curl -sL https://rpm.nodesource.com/setup_lts.x | sudo bash
 yum install nodejs -y
 #useradd roboshop
 mkdir -p /app
-curl -L -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip
-cd /app
+#curl -L -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip
+#cd /app
 #unzip /tmp/catalogue.zip
 #cd /app
 #npm install
