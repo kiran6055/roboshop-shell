@@ -3,12 +3,12 @@
 #description: cataloguescript
 
 script_location=$(pwd)
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash
+curl -sL https://rpm.nodesource.com/setup_lts.x | sudo bash
 yum install nodejs -y
-useradd roboshop
-mkdir /app
-curl -L -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip
-unzip /tmp/catalogue.zip
+#useradd roboshop
+#mkdir /app
+#curl -L -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip
+#unzip /tmp/catalogue.zip
 cd /app
 npm install
 cp ${script_location}/files/catalogueservice /etc/systemd/system/catalogue.service
