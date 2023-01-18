@@ -16,7 +16,7 @@ cd /app
 npm install
 cp ${script_location}/files/catalogueservice /etc/systemd/system/catalogue.service
 
-Systemctl daemon-reload
+systemctl daemon-reload
 systemctl enable catalogue
 systemctl start catalogue
 
