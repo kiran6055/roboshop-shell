@@ -11,9 +11,9 @@ yum install nodejs -y
 mkdir -p /app
 curl -L -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip
 cd /app
-unzip /tmp/catalogue.zip
-cd /app
-npm install
+#unzip /tmp/catalogue.zip
+#cd /app
+#npm install
 cp ${script_location}/files/catalogueservice /etc/systemd/system/catalogue.service
 
 systemctl daemon-reload
