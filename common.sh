@@ -8,9 +8,9 @@ LOG=/tmp/roboshop.log
 status_check() {
   if [ $? -eq 0 ]
   then
-    echo -e "\e[32m Sucess\e[0m"
+    echo -e "\e[1;32m Sucess\e[0m"
   else
-    echo -e "\e[31m Failure\e[0m"
+    echo -e "\e[1;31m Failure\e[0m"
     echo "refer lof file LOG - ${LOG}"
     exit
   fi
