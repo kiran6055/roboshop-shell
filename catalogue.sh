@@ -25,7 +25,7 @@ yum install nodejs -y &>>${LOG}
 
 status_check
 
-echo -e "\e[31m creating user roboshop[0m"
+echo -e "\e[31m creating user roboshop\e[0m"
 useradd roboshop &>>${LOG}
 status_check
 
