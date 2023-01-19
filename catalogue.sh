@@ -8,7 +8,7 @@ print_head settingup node repository
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${LOG}
 status_check
 
-Print_head "installing NodeJS""
+print_head "installing NodeJS"
 yum install nodejs -y &>>${LOG}
 
 status_check
@@ -38,7 +38,7 @@ print_head "installing NodeJS dependencies"
 npm install &>>${LOG}
 status_check
 
-print_head "33m configuring catalgoue service file"
+print_head "configuring catalgoue service file"
 cp ${script_location}/files/catalogueservice /etc/systemd/system/catalogue.service &>>${LOG}
 status_check
 
@@ -61,6 +61,5 @@ status_check
 print_head "loading Schema"
 yum install mongodb-org-shell -y &>>${LOG}
 status_check
-
 mongo --host localhost </app/schema/catalogue.js &>>${LOG}
 status_check
