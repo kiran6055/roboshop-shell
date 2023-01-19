@@ -4,32 +4,32 @@
 
 source common.sh
 
-echo -e "\e[32m install nginx\e[0m"
+print_head "install nginx"
 yum install nginx -y &>>${LOG}
 status_check
 
 systemctl enable nginx &>>${LOG}
 systemctl start nginx &>>${LOG}
 
-echo -e "\e[33m remove old content\e[0m"
+print_head "remove old content"
 
 rm -rf /usr/share/nginx/html/* &>>${LOG}
 
 status_check
 
-echo -e "\e[32m Download Frontend content\e[0m"
+print_head "Download Frontend content"
 
 curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend.zip &>>${LOG}
 cd /usr/share/nginx/html &>>${LOG}
 
 status_check
 
-echo -e "\e[31m unziping frontend contenet in html\e[0m"
+Print_head "nziping frontend contenet in html"
 unzip /tmp/frontend.zip &>>${LOG}
 
 status_check
 
-echo -e "\e[32m copying roboshop nginxfile\e[0m"
+print_head "copying roboshop nginxfile"
 cp ${script_location}/files/nginxroboshop.conf /etc/nginx/default.d/roboshop.conf
 status_check
 

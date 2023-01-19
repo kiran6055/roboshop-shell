@@ -4,61 +4,61 @@
 
 
 
-echo -e "\e[34m settingup node repository\e[0m"
+print_head settingup node repository
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${LOG}
 status_check
 
-echo -e "\e[35m installing NodeJS\e[0m"
+Print_head "installing NodeJS""
 yum install nodejs -y &>>${LOG}
 
 status_check
 
-echo -e "\e[31m creating user roboshop\e[0m"
+print_head "creating user roboshop"
 useradd roboshop &>>${LOG}
 status_check
 
-echo -e "\e[31m creating app\e[0m"
+print_head "creating app"
 mkdir -p /app &>>${LOG}
 status_check
 
-echo -e "\e[31m downloading catalogue code\e[0m"
+print_head "downloading catalogue code"
 curl -L -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip &>>${LOG}
 status_check
 cd /app
 
 
-echo -e "\e[31m unziping catalogue code\e[0m"
+print_head "unziping catalogue code"
 unzip /tmp/catalogue.zip &>>${LOG}
 status_check
 
 cd /app
 status_check
 
-echo -e "\e[34m installing NodeJS dependencies\e[0m"
+print_head "installing NodeJS dependencies"
 npm install &>>${LOG}
 status_check
 
-echo -e "\e[33m configuring catalgoue service file\e[0m"
+print_head "33m configuring catalgoue service file"
 cp ${script_location}/files/catalogueservice /etc/systemd/system/catalogue.service &>>${LOG}
 status_check
 
-echo -e "\e[31m system reload\e[0m"
+print_head "system reload"
 systemctl daemon-reload &>>${LOG}
 status_check
 
-echo -e "\e[31m enable catalogue\e[0m"
+print_head "enable catalogue"
 systemctl enable catalogue &>>${LOG}
 status_check
 
-echo -e "\e[31m starting catalogue\e[0m"
+print_head "tarting catalogue"
 systemctl start catalogue &>>${LOG}
 status_check
 
-echo -e "\e[32m setting up mongodbrepo config file\e[0m"
+print_head "setting up mongodbrepo config file"
 cp ${script_location}/files/mongoDBrepo /etc/yum.repos.d/mongodb.repo &>>${LOG}
 status_check
 
-echo -e "\e[31m loading Schema\e[0m"
+print_head "loading Schema"
 yum install mongodb-org-shell -y &>>${LOG}
 status_check
 
