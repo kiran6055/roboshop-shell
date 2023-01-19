@@ -16,3 +16,8 @@ status_check() {
   fi
 }
 
+print_head() {
+
+echo -e "\e[31m \e[0m"
+}
+
