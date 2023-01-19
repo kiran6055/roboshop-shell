@@ -8,9 +8,9 @@ LOG=/tmp/roboshop.log
 status_check() {
   if [ $? -eq 0 ]
   then
-    echo -e '\e[32m Sucess\e[om'
+    echo -e "\e[32m Sucess\e[om"
   else
-    echo -e '\e[31m Failure\e[om'
+    echo -e "\e[31m Failure\e[om"
     exit
   fi
 }
