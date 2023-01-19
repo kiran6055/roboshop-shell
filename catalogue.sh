@@ -15,7 +15,7 @@ status_check() {
     exit
   fi
 }
-set -e
+
 
 echo -e "\e[34m settingup node repository\e[0m"
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${LOG}
