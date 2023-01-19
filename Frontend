@@ -19,6 +19,6 @@ cd /usr/share/nginx/html &>>${LOG}
 echo -e "\e[31m unziping frontend contenet in html\e[0m"
 unzip /tmp/frontend.zip &>>${LOG}
 
-echo -e "\e[32m copying roboshop nginxfilee[0m"
+echo -e "\e[32m copying roboshop nginxfile\e[0m"
 cp ${script_location}/files/nginxroboshop.conf /etc/nginx/default.d/roboshop.conf
 systemctl restart  nginx &>>${LOG}
