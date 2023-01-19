@@ -2,14 +2,23 @@
 #author:kiran
 #description:shell script for automation
 script_location=$(pwd)
-yum install nginx -y
-systemctl enable nginx
-systemctl start nginx
-rm -rf /usr/share/nginx/html/*
+LOG=/tmp/roboshop.log
 
-curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
-cd /usr/share/nginx/html
-unzip /tmp/frontend.zip
+echo -e "\e[32m install nginx\e[0m"
+yum install nginx -y &>>${LOG}
+systemctl enable nginx &>>${LOG}
+systemctl start nginx &>>${LOG}
 
+echo -e "\e[33m remove old content\e[0m"
+rm -rf /usr/share/nginx/html/* &>>${LOG}
+
+echo -e "\e[32m Download Frontend content\e[0m"
+curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend.zip &>>${LOG}
+cd /usr/share/nginx/html &>>${LOG}
+
+echo -e "\e[31m unziping frontend contenet in html\e[0m"
+unzip /tmp/frontend.zip &>>${LOG}
+
+echo -e "\e[32m copying roboshop nginxfilee[0m"
 cp ${script_location}/files/nginxroboshop.conf /etc/nginx/default.d/roboshop.conf
-systemctl restart  nginx
+systemctl restart  nginx &>>${LOG}
