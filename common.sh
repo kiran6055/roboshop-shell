@@ -18,7 +18,7 @@ status_check() {
 
 print_head() {
 
-echo -e "\e[1m $1 \e[0m"
+  echo -e "\e[1m $1 \e[0m"
 }
 
 
@@ -54,27 +54,27 @@ app-preq () {
 
 systemd_setup () {
 
-print_head "configuring ${componet} service file"
-cp ${script_location}/files/${componet}.service /etc/systemd/system/${componet}.service &>>${LOG}
-status_check
+  print_head "configuring ${componet} service file"
+  cp ${script_location}/files/${componet}.service /etc/systemd/system/${componet}.service &>>${LOG}
+  status_check
 
-print_head "system reload"
-systemctl daemon-reload &>>${LOG}
-status_check
+  print_head "system reload"
+  systemctl daemon-reload &>>${LOG}
+  status_check
 
-print_head "enable ${componet}"
-systemctl enable ${componet} &>>${LOG}
-status_check
+  print_head "enable ${componet}"
+  systemctl enable ${componet} &>>${LOG}
+  status_check
 
-print_head "restarting ${componet}"
-systemctl restart ${componet} &>>${LOG}
-status_check
+  print_head "restarting ${componet}"
+  systemctl restart ${componet} &>>${LOG}
+  status_check
 }
 
 
 load_schema () {
   if [ ${schema_load} == "true" ]; then
-    if [ ${schema_type} == "mongo"]; then
+    if [ ${schema_type} == "mongo" ]; then
       print_head "setting up mongodbrepo config file"
       cp ${script_location}/files/mongoDBrepo /etc/yum.repos.d/mongodb.repo &>>${LOG}
       status_check
@@ -86,7 +86,7 @@ load_schema () {
       mongo --host mongodb-dev.kiranprav.link/app/schema/${componet}.js &>>${LOG}
       status_check
     fi
-    if [ ${schema_type} == "mysql"]; then
+    if [ ${schema_type} == "mysql" ]; then
       print_head "install mysql client"
       yum install mysql -y &>>${LOG}
       status_check
@@ -102,26 +102,26 @@ load_schema () {
 
 
 Node () {
-print_head "settingup node repository"
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${LOG}
-status_check
+  print_head "settingup node repository"
+  curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${LOG}
+  status_check
 
-print_head "installing NodeJS"
-yum install nodejs -y &>>${LOG}
-status_check
+  print_head "installing NodeJS"
+  yum install nodejs -y &>>${LOG}
+  status_check
 
-app_preq
-
-
-print_head "installing NodeJS dependencies"
-cd /app
-npm install &>>${LOG}
-status_check
-
-systemd_setup
+  app_preq
 
 
-load_schema
+  print_head "installing NodeJS dependencies"
+  cd /app
+  npm install &>>${LOG}
+  status_check
+
+  systemd_setup
+
+
+  load_schema
 
 }
 
@@ -134,14 +134,14 @@ maven () {
   app_preq
 
   print_head "building Package"
-  mvn clean package &>>${LOG}
+  mvn clean package  &>>${LOG}
+  status_check
+
+    print_head "copy app file to app location"
+  mv target/${component}-1.0.jar ${component}.jar
   status_check
 
   systemd_setup
-
-  print_head "copy app file to app location"
-  mv target/${component}-1.0.jar ${component}.jar
-  status_check
 
   load_schema
 
