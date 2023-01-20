@@ -56,7 +56,7 @@ systemctl start user &>>${LOG}
 status_check
 
 print_head "config mongodbrepo file"
-cp ${script_location}/file/mongoDBrepo /etc/yum.repos.d/mongodb.repo &>>${LOG}
+cp ${script_location}/files/mongoDBrepo /etc/yum.repos.d/mongodb.repo &>>${LOG}
 status_check
 
 print_head "Downloading Mongodb"
