@@ -4,9 +4,11 @@
 
 source common.sh
 
-componet=catalogue
+
+componet=shipping
 
 schema_load=true
 
-Node
+schema_type=mongo
 
+node
