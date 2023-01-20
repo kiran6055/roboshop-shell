@@ -137,7 +137,7 @@ maven () {
   mvn clean package  &>>${LOG}
   status_check
 
-    print_head "copy app file to app location"
+  print_head "copy app file to app location"
   mv target/${component}-1.0.jar ${component}.jar
   status_check
 
