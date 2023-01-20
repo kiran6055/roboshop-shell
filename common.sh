@@ -88,7 +88,7 @@ status_check
 print_head "loading Schema"
 yum install mongodb-org-shell -y &>>${LOG}
 status_check
-mongo --host dev-mongodb.kiranprav.link/app/schema/${componet}.js &>>${LOG}
+mongo --host mongodb-dev.kiranprav.link/app/schema/${componet}.js &>>${LOG}
 status_check
 fi
 }
