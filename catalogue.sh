@@ -7,8 +7,10 @@ source common.sh
 
 componet=shipping
 
-schema_load=true
+LOAD_SCHEMA=true
 
 schema_type=mongo
 
-Node
+SYSTEMD_SETUP
+
+NODE
