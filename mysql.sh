@@ -22,7 +22,7 @@ systemctl enable mysqld &>>${LOG}
 systemctl restart mysqld
 status_check
 
-mysql_secure_installation --set-root-pass ${root_mysql_password &>>${LOG}
+mysql_secure_installation --set-root-pass ${root_mysql_password} &>>${LOG}
 if [ $? -eq 1 ]; then
   echo "password is already changed"
 fi
