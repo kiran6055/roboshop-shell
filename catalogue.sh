@@ -4,7 +4,7 @@
 
 source common.sh
 
-node
-
 componet=${catalogue}
+
+Node
 
