@@ -48,7 +48,7 @@ curl -L -o /tmp/${componet}.zip https://roboshop-artifacts.s3.amazonaws.com/${co
 status_check
 
 print_head "cleanup old content"
-rm -rf /app/* &>>${{LOG}
+rm -rf /app/* &>>${LOG}
 status_check
 
 
