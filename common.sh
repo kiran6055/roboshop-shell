@@ -48,6 +48,7 @@ app_preq () {
   print_head "unziping ${componet} code"
   cd /app
   unzip /tmp/${componet}.zip &>>${LOG}
+  cd /app
   status_check
 
 }
@@ -114,7 +115,6 @@ Node () {
 
 
   print_head "installing NodeJS dependencies"
-  cd /app
   npm install &>>${LOG}
   status_check
 
@@ -138,7 +138,7 @@ maven () {
   status_check
 
   print_head "copy app file to app location"
-  mv /target{component}-1.0.jar ${component}.jar
+    mv target/{component}-1.0.jar ${component}.jar
   status_check
 
   systemd_setup
