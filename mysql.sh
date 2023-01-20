@@ -1,6 +1,6 @@
  source common.sh
 
-if [ -z "$root_mysql_password" ]; then
+if [ -z "${root_mysql_password}" ]; then
   echo "variable root_mysql_password missing"
   exit 1
 fi
@@ -22,7 +22,7 @@ systemctl enable mysqld &>>${LOG}
 systemctl restart mysqld
 status_check
 
-mysql_secure_installation --set-root-pass RoboShop@1 &>>${LOG}
+mysql_secure_installation --set-root-pass ${root_mysql_password &>>${LOG}
 if [ $? -eq 1 ]; then
   echo "password is already changed"
 fi
