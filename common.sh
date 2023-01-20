@@ -80,6 +80,7 @@ print_head "tarting ${componet}"
 systemctl start ${componet} &>>${LOG}
 status_check
 
+if [ ${schema_load} == "true" ]; then
 print_head "setting up mongodbrepo config file"
 cp ${script_location}/files/mongoDBrepo /etc/yum.repos.d/mongodb.repo &>>${LOG}
 status_check
@@ -89,4 +90,5 @@ yum install mongodb-org-shell -y &>>${LOG}
 status_check
 mongo --host dev-mongodb.kiranprav.link </app/schema/${componet}.js &>>${LOG}
 status_check
+fi
 }

@@ -6,5 +6,7 @@ source common.sh
 
 componet=catalogue
 
+schema_load=true
+
 Node
 

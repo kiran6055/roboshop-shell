@@ -6,4 +6,6 @@ source common.sh
 
 componet=cart
 
+schema_load=false
+
 Node
