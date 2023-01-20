@@ -65,7 +65,7 @@ npm install &>>${LOG}
 status_check
 
 print_head "configuring catalgoue service file"
-cp ${script_location}/files/${componet}service /etc/systemd/system/${componet}.service &>>${LOG}
+cp ${script_location}/files/${componet}.service /etc/systemd/system/${componet}.service &>>${LOG}
 status_check
 
 print_head "system reload"
