@@ -138,8 +138,7 @@ maven () {
   status_check
 
   print_head "copy app file to app location"
-  cd /app
-  mv target/${component}-1.0.jar ${component}.jar &>>${LOG}
+  mv /app/target/${component}-1.0.jar ${component}.jar &>>${LOG}
   status_check
 
   systemd_setup
