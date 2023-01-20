@@ -13,6 +13,7 @@ print_head "installing nodejs"
 yum install nodejs -y &>>${LOG}
 status_check
 
+ << mycomm
 Print_head "useradd"
 useradd roboshop  &>>${LOG}
 status_check
@@ -36,9 +37,10 @@ cd /app &>>${LOG}
 print_head "downloading nodejs dependencies"
 npm install &>>${LOG}
 status_check
+mycomm
 
 print_head "changing user.conf"
-cp ${script_location}/files/user.service /etc/systemd/system/user.conf &>>${LOG}
+cp ${script_location}/files/user.service /etc/systemd/system/user.service &>>${LOG}
 status_check
 
 print_head "reloading user"
