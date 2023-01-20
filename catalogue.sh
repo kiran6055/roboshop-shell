@@ -11,4 +11,4 @@ schema_load=true
 
 schema_type=mongo
 
-node
+Node
