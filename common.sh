@@ -44,7 +44,7 @@ app_preq() {
     print_head "Extracting App Content"
     cd /app
     unzip /tmp/${component}.zip &>>${LOG}
-    cd /app
+
     status_check
 
 }
@@ -130,6 +130,7 @@ maven() {
   app_preq
 
   print_head "building Package"
+  cd /app
   mvn clean package  &>>${LOG}
   status_check
 
