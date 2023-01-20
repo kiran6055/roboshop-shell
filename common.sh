@@ -64,7 +64,7 @@ cd /app
 npm install &>>${LOG}
 status_check
 
-print_head "configuring catalgoue service file"
+print_head "configuring ${componet} service file"
 cp ${script_location}/files/${componet}.service /etc/systemd/system/${componet}.service &>>${LOG}
 status_check
 
@@ -72,11 +72,11 @@ print_head "system reload"
 systemctl daemon-reload &>>${LOG}
 status_check
 
-print_head "enable catalogue"
+print_head "enable ${componet}"
 systemctl enable ${componet} &>>${LOG}
 status_check
 
-print_head "tarting catalogue"
+print_head "tarting ${componet}"
 systemctl start ${componet} &>>${LOG}
 status_check
 
