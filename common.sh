@@ -1,146 +1,155 @@
-#!/bin/bash
-#author:kiran
-#description: creating function which are similar in every script to save time
-
 script_location=$(pwd)
 LOG=/tmp/roboshop.log
 
 status_check() {
-  if [ $? -eq 0 ]
-  then
-    echo -e "\e[1;32m Sucess\e[0m"
+  if [ $? -eq 0 ]; then
+    echo -e "\e[1;32mSUCCESS\e[0m"
   else
-    echo -e "\e[1;31m Failure\e[0m"
-    echo "refer lof file LOG - ${LOG}"
-    exit
+    echo -e "\e[1;31mFAILURE\e[0m"
+    echo "Refer Log file for more information, LOG - ${LOG}"
+    exit 1
   fi
 }
 
 print_head() {
-
   echo -e "\e[1m $1 \e[0m"
 }
 
-
-app_preq() {
+APP_PREREQ() {
 
   print_head "Add Application User"
-    id roboshop &>>${LOG}
-    if [ $? -ne 0 ]; then
-      useradd roboshop &>>${LOG}
-    fi
-    status_check
+  id roboshop &>>${LOG}
+  if [ $? -ne 0 ]; then
+    useradd roboshop &>>${LOG}
+  fi
+  status_check
 
-    mkdir -p /app &>>${LOG}
+  mkdir -p /app &>>${LOG}
 
-    print_head "Downloading App content"
-    curl -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${LOG}
-    status_check
+  print_head "Downloading App content"
+  curl -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${LOG}
+  status_check
 
-    print_head "Cleanup Old Content"
-    rm -rf /app/* &>>${LOG}
-    status_check
+  print_head "Cleanup Old Content"
+  rm -rf /app/* &>>${LOG}
+  status_check
 
-    print_head "Extracting App Content"
-    cd /app
-    unzip /tmp/${component}.zip &>>${LOG}
-    cd /app
-
-    status_check
+  print_head "Extracting App Content"
+  cd /app
+  unzip /tmp/${component}.zip &>>${LOG}
+  status_check
 
 }
 
-systemd_setup() {
-
-  print_head "configuring ${componet} service file"
-  cp ${script_location}/files/${componet}.service /etc/systemd/system/${componet}.service &>>${LOG}
+SYSTEMD_SETUP() {
+  print_head "Configuring ${component} Service File"
+  cp ${script_location}/files/${component}.service /etc/systemd/system/${component}.service &>>${LOG}
   status_check
 
-  print_head "system reload"
+  print_head "Reload SystemD"
   systemctl daemon-reload &>>${LOG}
   status_check
 
-  print_head "enable ${componet}"
-  systemctl enable ${componet} &>>${LOG}
+  print_head "Enable ${component} Service "
+  systemctl enable ${component} &>>${LOG}
   status_check
 
-  print_head "restarting ${componet}"
-  systemctl restart ${componet} &>>${LOG}
+  print_head "Start ${component} service "
+  systemctl start ${component} &>>${LOG}
   status_check
 }
 
-
-load_schema() {
+LOAD_SCHEMA() {
   if [ ${schema_load} == "true" ]; then
-    if [ ${schema_type} == "mongo" ]; then
-      print_head "setting up mongodbrepo config file"
-      cp ${script_location}/files/mongoDBrepo /etc/yum.repos.d/mongodb.repo &>>${LOG}
+
+    if [ ${schema_type} == "mongo"  ]; then
+      print_head "Configuring Mongo Repo "
+      cp ${script_location}/files/mongodb.repo /etc/yum.repos.d/mongodb.repo &>>${LOG}
       status_check
 
-      print_head "installing mongoclient"
+      print_head "Install Mongo Client"
       yum install mongodb-org-shell -y &>>${LOG}
       status_check
-      print_head "loading schema"
-      mongo --host mongodb-dev.kiranprav.link/app/schema/${componet}.js &>>${LOG}
+
+      print_head "Load Schema"
+      mongo --host mongodb-dev.devopsb70.online </app/schema/${component}.js &>>${LOG}
       status_check
     fi
-    if [ ${schema_type} == "mysql" ]; then
-      print_head "install mysql client"
+
+    if [ ${schema_type} == "mysql"  ]; then
+
+      print_head "Install MySQL Client"
       yum install mysql -y &>>${LOG}
       status_check
 
-      print_head "load schema"
-      mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -p${root_mysql_password} < /app/schema/${componet}.sql &>>${LOG}
+      print_head "Load Schema"
+      mysql -h mysql-dev.devopsb70.online -uroot -p${root_mysql_password} < /app/schema/shipping.sql  &>>${LOG}
       status_check
     fi
+
   fi
-
-
 }
 
-
-Node() {
-  print_head "settingup node repository"
+NODEJS() {
+  print_head "Configuring NodeJS Repos"
   curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${LOG}
   status_check
 
-  print_head "installing NodeJS"
+  print_head "Install NodeJS"
   yum install nodejs -y &>>${LOG}
   status_check
 
-  app_preq
+  APP_PREREQ
 
-
-  print_head "installing NodeJS dependencies"
+  print_head "Installing NodeJS Dependencies"
+  cd /app &>>${LOG}
   npm install &>>${LOG}
   status_check
 
-  systemd_setup
+  SYSTEMD_SETUP
 
-
-  load_schema
-
+  LOAD_SCHEMA
 }
 
-maven() {
+MAVEN() {
 
-  print_head "installing Maven"
+  print_head "Install Maven"
   yum install maven -y &>>${LOG}
   status_check
 
-  app_preq
+  APP_PREREQ
 
-  print_head "building Package"
-  cd /app
+  print_head "Build a package"
   mvn clean package  &>>${LOG}
   status_check
 
-  print_head "copy app file to app location"
+  print_head "Copy App file to App Location"
   mv target/${component}-1.0.jar ${component}.jar
   status_check
 
-  systemd_setup
+  SYSTEMD_SETUP
 
-  load_schema
+  LOAD_SCHEMA
+
+}
+
+PYTHON() {
+
+  print_head "Install Python"
+  yum install python36 gcc python3-devel -y &>>${LOG}
+  status_check
+
+  APP_PREREQ
+
+  print_head "Download Dependencies"
+  cd /app
+  pip3.6 install -r requirements.txt  &>>${LOG}
+  status_check
+
+  print_head "Update Passwords in Service File"
+  sed -i -e "s/roboshop_rabbitmq_password/${roboshop_rabbitmq_password}/" ${script_location}/files/${component}.service  &>>${LOG}
+  status_check
+
+  SYSTEMD_SETUP
 
 }
