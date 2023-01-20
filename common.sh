@@ -138,7 +138,7 @@ maven () {
   status_check
 
   print_head "copy app file to app location"
-  mv target/${component}-1.0.jar ${component}.jar
+  mv target/$shipping-1.0.jar ${component}.jar
   status_check
 
   systemd_setup
