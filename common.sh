@@ -22,7 +22,7 @@ echo -e "\e[1m $1 \e[0m"
 }
 
 Node () {
-print_head settingup node repository
+print_head "settingup node repository"
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${LOG}
 status_check
 
@@ -43,7 +43,7 @@ print_head "creating app"
 mkdir -p /app &>>${LOG}
 status_check
 
-print_head "downloading catalogue code"
+print_head "downloading ${componet} code"
 curl -L -o /tmp/${componet}.zip https://roboshop-artifacts.s3.amazonaws.com/${componet}.zip &>>${LOG}
 status_check
 
@@ -53,7 +53,7 @@ status_check
 
 
 
-print_head "unziping catalogue code"
+print_head "unziping ${componet} code"
 cd /app
 unzip /tmp/${componet}.zip &>>${LOG}
 status_check
