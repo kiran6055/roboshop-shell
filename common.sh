@@ -22,7 +22,7 @@ print_head() {
 }
 
 
-app-preq () {
+app_preq () {
 
   print_head "creating user roboshop"
   id roboshop &>>${LOG}
