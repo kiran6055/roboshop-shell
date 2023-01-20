@@ -122,22 +122,22 @@ Node() {
 
 maven() {
 
-  print_head "Install Maven"
+  print_head "installing Maven"
   yum install maven -y &>>${LOG}
   status_check
 
   app_preq
 
-  print_head "Build a package"
+  print_head "building Package"
   mvn clean package  &>>${LOG}
   status_check
 
-  print_head "Copy App file to App Location"
-  mv target/${component}-1.0.jar ${component}.jar
+  print_head "copy app file to app location"
+    mv target/${component}-1.0.jar ${component}.jar
   status_check
 
-  SYSTEMD_SETUP
+  systemd_setup
 
-  LOAD_SCHEMA
+  load_schema
 
 }
