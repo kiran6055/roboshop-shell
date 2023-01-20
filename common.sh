@@ -24,32 +24,27 @@ print_head() {
 
 app_preq() {
 
-  print_head "creating user roboshop"
-  id roboshop &>>${LOG}
-  if [ $? -ne 0 ]
-  then
-    useradd roboshop &>>${LOG}
-  fi
-  status_check
+  print_head "Add Application User"
+    id roboshop &>>${LOG}
+    if [ $? -ne 0 ]; then
+      useradd roboshop &>>${LOG}
+    fi
+    status_check
 
-  print_head "creating appdirectory"
-  mkdir -p /app &>>${LOG}
-  status_check
+    mkdir -p /app &>>${LOG}
 
-  print_head "downloading ${componet} code"
-  curl -L -o /tmp/${componet}.zip https://roboshop-artifacts.s3.amazonaws.com/${componet}.zip &>>${LOG}
-  status_check
+    print_head "Downloading App content"
+    curl -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${LOG}
+    status_check
 
-  print_head "cleanup old content"
-  rm -rf /app/* &>>${LOG}
-  status_check
+    print_head "Cleanup Old Content"
+    rm -rf /app/* &>>${LOG}
+    status_check
 
-
-  print_head "unziping ${componet} code"
-  cd /app
-  unzip /tmp/${componet}.zip &>>${LOG}
-  cd /app
-  status_check
+    print_head "Extracting App Content"
+    cd /app
+    unzip /tmp/${component}.zip &>>${LOG}
+    status_check
 
 }
 
