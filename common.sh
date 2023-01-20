@@ -22,7 +22,7 @@ print_head() {
 }
 
 
-app_preq () {
+app_preq() {
 
   print_head "creating user roboshop"
   id roboshop &>>${LOG}
@@ -53,7 +53,7 @@ app_preq () {
 
 }
 
-systemd_setup () {
+systemd_setup() {
 
   print_head "configuring ${componet} service file"
   cp ${script_location}/files/${componet}.service /etc/systemd/system/${componet}.service &>>${LOG}
@@ -73,7 +73,7 @@ systemd_setup () {
 }
 
 
-load_schema () {
+load_schema() {
   if [ ${schema_load} == "true" ]; then
     if [ ${schema_type} == "mongo" ]; then
       print_head "setting up mongodbrepo config file"
@@ -102,7 +102,7 @@ load_schema () {
 }
 
 
-Node () {
+Node() {
   print_head "settingup node repository"
   curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${LOG}
   status_check
@@ -125,7 +125,7 @@ Node () {
 
 }
 
-maven () {
+maven() {
 
   print_head "installing Maven"
   yum install maven -y &>>${LOG}
