@@ -35,6 +35,7 @@ APP_PREREQ() {
   status_check
 
   print_head "Extracting App Content"
+  cd /app
   unzip /tmp/${component}.zip &>>${LOG}
   status_check
 
