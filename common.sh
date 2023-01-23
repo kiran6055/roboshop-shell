@@ -171,7 +171,7 @@ golang() {
 
   print_head "config dispatchservice file"
   sed -i -e "s/roboshop_rabbitmq_password/${roboshop_rabbitmq_password/}" ${script_location}/files/${component}.service &>>${LOG}
-  Status_check
+  status_check
 
   SYSTEMD_SETUP
 }
