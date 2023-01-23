@@ -9,7 +9,6 @@ print_head "config erlang yum repos"
 curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | sudo bash &>>${LOG}
 status_check
 
-
 print_head "installing rlang"
 yum install erlang -y &>>${LOG}
 status_check
@@ -34,7 +33,7 @@ print_head "setting up username and password"
 #rabbitmqctl list_users | grep roboshop &>>${LOG} &>>${LOG}
 #if [ $? -ne 0 ]; then
 rabbitmqctl add_user roboshop ${roboshop_rabbitmq_password} &>>${LOG}
-fi
+#fi
 
 status_check
 
