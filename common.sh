@@ -157,20 +157,20 @@ PYTHON() {
 golang() {
 
   print_head "installing golang"
-  yum install golang -y
+  yum install golang -y &>>${LOG}
   status_check
 
   APP_PREREQ
 
   print_head "donaloding dependencies"
-  cd /app
-  go mod init dispatch
-  go get
-  go build
+  cd /app &>>${LOG}
+  go mod init dispatch &>>${LOG}
+  go get &>>${LOG}
+  go build &>>${LOG}
   status_check
 
   print_head "config dispatchservice file"
-  sed -i -e "s/roboshop_rabbitmq_password/${roboshop_rabbitmq_password/}" ${script_location}/files/${component}.service
+  sed -i -e "s/roboshop_rabbitmq_password/${roboshop_rabbitmq_password/}" ${script_location}/files/${component}.service &>>${LOG}
   Status_check
 
   SYSTEMD_SETUP
