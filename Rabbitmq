@@ -12,7 +12,7 @@ status_check
 
 print_head "installing rlang"
 yum install erlang -y &>>${LOG}
-Status_check
+status_check
 
 print_head "config rabit mq repo"
 curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash &>>${LOG}
