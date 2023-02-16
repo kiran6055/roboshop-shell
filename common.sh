@@ -72,7 +72,7 @@ LOAD_SCHEMA() {
       status_check
 
       print_head "Load Schema"
-      mongo --host mongodb.kiranprav.link </app/schema/${component}.js &>>${LOG}
+      mongo --host 172.31.2.158 </app/schema/${component}.js &>>${LOG}
       status_check
     fi
 
