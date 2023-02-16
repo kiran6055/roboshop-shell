@@ -8,4 +8,4 @@ componet=user
 
 schema_load=true
 
-Node
+NODEJS
