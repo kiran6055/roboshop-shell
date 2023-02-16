@@ -4,7 +4,7 @@
 
 source common.sh
 
-componet=cart
+component=cart
 
 schema_load=false
 

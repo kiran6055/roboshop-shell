@@ -5,7 +5,7 @@
 source common.sh
 
 
-componet=catalogue
+component=catalogue
 
 LOAD_SCHEMA=true
 

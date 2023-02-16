@@ -4,7 +4,7 @@
 
 source common.sh
 
-componet=user
+component=user
 
 schema_load=true
 
