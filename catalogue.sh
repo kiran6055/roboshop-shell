@@ -13,4 +13,4 @@ schema_type=mongo
 
 SYSTEMD_SETUP
 
-NODE
+NODEJS
