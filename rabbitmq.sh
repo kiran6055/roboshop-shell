@@ -1,7 +1,7 @@
 source common.sh
 
 if [ -z "${roboshop_rabbitmq_password}" ]; then
- echo "variable roboshop_rabbitmq_password_missing"
+ echo "Variable roboshop_rabbitmq_password_missing"
  exit 1
 fi
 
