@@ -11,6 +11,4 @@ LOAD_SCHEMA=true
 
 schema_type=mongo
 
-SYSTEMD_SETUP
-
 NODEJS
