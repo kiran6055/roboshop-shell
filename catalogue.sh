@@ -5,7 +5,7 @@
 source common.sh
 
 
-componet=shipping
+componet=catalogue
 
 LOAD_SCHEMA=true
 
