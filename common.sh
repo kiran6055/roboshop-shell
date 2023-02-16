@@ -83,7 +83,7 @@ LOAD_SCHEMA() {
       status_check
 
       print_head "Load Schema"
-      mysql -h mysql.kiranprav.link -uroot -p${root_mysql_password} < /app/schema/shipping.sql  &>>${LOG}
+      mysql -h 172.31.2.158 -uroot -p${root_mysql_password} < /app/schema/shipping.sql  &>>${LOG}
       status_check
     fi
 
