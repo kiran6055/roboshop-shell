@@ -30,7 +30,7 @@ systemctl start rabbitmq-server &>>${LOG}
 status_check
 
 print_head "setting up username and password"
-rabbitmqctl list_users | grep roboshop &>>${LOG} &>>${LOG}
+rabbitmqctl list_users | grep roboshop &>>${LOG}
 if [ $? -ne 0 ]; then
 rabbitmqctl add_user roboshop ${roboshop_rabbitmq_password} &>>${LOG}
 fi
