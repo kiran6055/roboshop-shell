@@ -7,8 +7,8 @@ Description = User Service
 [Service]
 User=roboshop
 Environment=MONGO=true
-Environment=REDIS_HOST=172.31.2.225
-Environment=MONGO_URL="mongodb://172.31.2.116:27017/users"
+Environment=REDIS_HOST=redis.kiranprav.link
+Environment=MONGO_URL="mongodb://mongodb.kiranprav.link:27017/users"
 ExecStart=/bin/node /app/server.js
 SyslogIdentifier=user
 
