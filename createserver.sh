@@ -1,8 +1,8 @@
 #!/bin/bash
 
 ##### Change these values ###
-ZONE_ID="Z05909301HWY2LI69YHHG"
-DOMAIN="kiranprav.link"
+ZONE_ID="Z09836283CE71XJOYIM7M"
+DOMAIN="awsctr.online"
 SG_NAME="ALL-FOR-ALL-Frontend"
 env=dev
 #############################
